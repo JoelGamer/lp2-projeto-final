@@ -27,4 +27,8 @@ public class CoreConsole {
                 throw new InvalidStatus("This status code doesn't exist!");
         }
     }
+
+    public Core getCore() {
+        return core;
+    }
 }
