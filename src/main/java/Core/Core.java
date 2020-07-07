@@ -19,7 +19,7 @@ public class Core {
 
     private void loadCoreProperties() throws IOException {
         Properties properties = new Properties();
-        InputStream inputStream = new FileInputStream("src/main/java/resources/core.properties");
+        InputStream inputStream = new FileInputStream("F:\\Projetos\\lp2-projeto-final\\src\\main\\resources\\core.properties");
         properties.load(inputStream);
 
         setConsoleTags(properties);

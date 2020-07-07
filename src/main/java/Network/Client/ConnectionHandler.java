@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class ConnectionHandler extends Network implements Runnable {
-    public ConnectionHandler(Socket socket) throws IOException {
+    protected ConnectionHandler(Socket socket) throws IOException {
         super(socket);
     }
 

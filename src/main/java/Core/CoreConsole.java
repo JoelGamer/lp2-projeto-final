@@ -15,13 +15,13 @@ public class CoreConsole {
 
         switch (status) {
             case 1 :
-                System.out.println(core.getConsoleTags().get(0) + message);
+                System.out.println(core.getConsoleTags().get(0) + " " + message);
                 break;
             case 2 :
-                System.out.println(core.getConsoleTags().get(1) + message);
+                System.out.println("\u001B[33m" + core.getConsoleTags().get(1) + " " +  message + "\u001B[0m");
                 break;
             case 3 :
-                System.out.println(core.getConsoleTags().get(2) + message);
+                System.out.println("\u001B[31m" + core.getConsoleTags().get(2) + " " + message + "\u001B[0m");
                 break;
             default :
                 throw new InvalidStatus("This status code doesn't exist!");

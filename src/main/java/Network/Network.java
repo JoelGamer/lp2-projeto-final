@@ -1,6 +1,5 @@
 package Network;
 
-import Core.Core;
 import Network.Server.ConnectionHandler;
 import java.io.BufferedReader;
 import java.io.IOException;

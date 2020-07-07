@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class ConnectionHandler extends Network implements Runnable {
-    public ConnectionHandler(Socket socket, ArrayList<ConnectionHandler> connectionHandlers) throws IOException {
+    protected ConnectionHandler(Socket socket, ArrayList<ConnectionHandler> connectionHandlers) throws IOException {
         super(socket, connectionHandlers);
     }
 
