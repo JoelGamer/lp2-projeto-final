@@ -1,17 +1,20 @@
 package Core;
 
 import Exceptions.InvalidInput;
+import Models.Player;
 import UI.ClientUI;
 import java.util.Scanner;
 
 public class CoreOptions {
 
-    ClientUI clientUI;
-    CoreRoutes coreRoutes;
+    private final Player player;
+    private final ClientUI clientUI;
+    private final CoreRoutes coreRoutes;
 
-    public CoreOptions(Core core) {
+    public CoreOptions(Core core, Player player) {
+        this.player = player;
         this.clientUI = new ClientUI(core);
-        this.coreRoutes = new CoreRoutes(core);
+        this.coreRoutes = new CoreRoutes(core, this.player);
     }
 
     public boolean showOptions() {
@@ -37,10 +40,13 @@ public class CoreOptions {
     private boolean optionsRedirects(int option, Scanner scanner) throws InvalidInput {
         switch(option) {
             case 1 :
-                coreRoutes.multiplayerMatch(scanner);
+                coreRoutes.multiplayerOnlineMatch();
                 break;
-            case 2 :
-                coreRoutes.onlineMultiplayerMatch(scanner);
+            case 3 :
+                coreRoutes.showStatistics();
+                break;
+            case 4 :
+                coreRoutes.changePlayerUsername();
                 break;
             case 0 :
                 clientUI.exitMessage();

@@ -1,4 +1,4 @@
-package Network.v2.Client;
+package Network;
 
 import Core.Core;
 import Exceptions.InvalidInput;
@@ -24,6 +24,8 @@ public class NetworkedPlayer extends Player {
         clientUI.awaitingPlayerToConnect();
         Socket clientSocket = serverSocket.accept();
         clientUI.playerConnected();
+
+
     }
 
     public void createAsClient() throws IOException {

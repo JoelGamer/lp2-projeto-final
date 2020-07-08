@@ -10,20 +10,22 @@ import java.util.Scanner;
 public class CoreRoutes {
 
     private final ClientUI clientUI;
+    private final Player player;
 
-    public CoreRoutes(Core core) {
+    public CoreRoutes(Core core, Player player) {
         this.clientUI = new ClientUI(core);
+        this.player = player;
     }
 
-    public void multiplayerMatch(Scanner scanner) throws InvalidInput {
-        clientUI.insertName();
-        String name = scanner.nextLine();
-        Player player = new Player(name);
-
-        new Match(player, new Player("Bot Gerson"), clientUI).startMatch();
+    public void multiplayerOnlineMatch() throws InvalidInput {
+        new Match(this.player, new Player("Bot Gerson"), clientUI).startMatch();
     }
 
-    public void onlineMultiplayerMatch(Scanner scanner) {
+    public void showStatistics() {
+
+    }
+
+    public void changePlayerUsername() {
 
     }
 }

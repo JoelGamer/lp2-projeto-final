@@ -51,6 +51,7 @@ public class ClientUI {
     }
 
     public void exitMessage() {
+        System.out.println("Seu perfil foi salvo!");
         System.out.println("Obrigado por jogar o nosso jogo! Até mais!");
     }
 }

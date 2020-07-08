@@ -1,8 +1,10 @@
 package Models;
 
 import Exceptions.InvalidInput;
+import java.io.Serializable;
 
-public class Card {
+public class Card implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int suit;
     private int value;
     private int score;

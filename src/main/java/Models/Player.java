@@ -2,9 +2,11 @@ package Models;
 
 import Exceptions.InvalidInput;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Player {
+public class Player implements Serializable {
+    private static final long serialVersionUID = 1L;
     private final String username;
     private final Hand hand;
     private final Hand escovas;
