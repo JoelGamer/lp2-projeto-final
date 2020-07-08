@@ -28,8 +28,18 @@ public class Deck {
         return cards;
     }
 
-    public void shuffle() {
+    public Deck shuffle() {
         Collections.shuffle(cards);
+        return this;
+    }
+
+    public List<Card> getArrayOfCards() {
+        return this.cards;
+    }
+
+    public void setDeck(List<Card> cards) {
+        this.cards.clear();
+        this.cards.addAll(cards);
     }
 
     public void addCardToDeck(Card card) {
@@ -37,6 +47,6 @@ public class Deck {
     }
 
     public void displayDeck() {
-        cards.forEach(card -> System.out.println(card.toString()));
+        cards.forEach(Card::showCard);
     }
 }

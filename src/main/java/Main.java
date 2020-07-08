@@ -2,12 +2,14 @@ import Core.Core;
 import Core.CoreConsole;
 import Core.CoreOptions;
 import Exceptions.InvalidInput;
-import UI.ClientUI;
+import Models.Match;
+import Models.Player;
+
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        Core core = new Core("F:\\Projetos\\lp2-projeto-final\\src\\main\\resources\\config.properties");
+    public static void main(String[] args) throws IOException, InvalidInput {
+        Core core = new Core();
         CoreConsole coreConsole = new CoreConsole(core);
         CoreOptions coreOptions = new CoreOptions(core);
 

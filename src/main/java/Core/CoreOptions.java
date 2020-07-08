@@ -11,7 +11,7 @@ public class CoreOptions {
 
     public CoreOptions(Core core) {
         this.clientUI = new ClientUI(core);
-        this.coreRoutes = new CoreRoutes();
+        this.coreRoutes = new CoreRoutes(core);
     }
 
     public boolean showOptions() {
@@ -37,12 +37,9 @@ public class CoreOptions {
     private boolean optionsRedirects(int option, Scanner scanner) throws InvalidInput {
         switch(option) {
             case 1 :
-                coreRoutes.singleplayerMatch(scanner);
-                break;
-            case 2 :
                 coreRoutes.multiplayerMatch(scanner);
                 break;
-            case 3 :
+            case 2 :
                 coreRoutes.onlineMultiplayerMatch(scanner);
                 break;
             case 0 :

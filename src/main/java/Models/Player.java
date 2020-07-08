@@ -1,34 +1,36 @@
 package Models;
 
-import Exceptions.InvalidCredentials;
 import Exceptions.InvalidInput;
+
 import java.util.List;
 
 public class Player {
     private final String username;
-    private final String password;
     private final Hand hand;
+    private final Hand escovas;
+    private final int quantityEscovas;
     private double score;
 
-    public Player(String username, String password) throws InvalidCredentials {
-        if(username.equals("") || password.equals("")) throw new InvalidCredentials("Username or password is incorrect!");
+    public Player(String username) throws InvalidInput {
+        if(username.equals("")) throw new InvalidInput("Username cannot be empty!");
         this.username = username;
-        this.password = password;
         this.hand = new Hand();
-        this.score = retrieveScore();
-    }
-
-    public void showHand() {
-
+        this.escovas = new Hand();
+        this.quantityEscovas = 0;
+        this.score = 0;
     }
 
     private double retrieveScore() {
-        return 0.0;
+        return score;
     }
 
     public void addToHand(Card card) throws InvalidInput {
         if(card == null) throw new InvalidInput("Cannot add a invalid card to the hand!");
         hand.addCardToHand(card);
+    }
+
+    public void giveInitialHand(List<Card> cards) throws InvalidInput {
+        this.hand.setHandCards(cards);
     }
 
     public void addToScore(double score) throws InvalidInput {
@@ -40,8 +42,8 @@ public class Player {
         return username;
     }
 
-    private String getPassword() {
-        return password;
+    public Hand getHand() {
+        return this.hand;
     }
 
     public double getScore() {

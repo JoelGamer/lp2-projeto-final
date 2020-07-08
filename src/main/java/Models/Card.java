@@ -14,14 +14,7 @@ public class Card {
     }
 
     public void showCard() {
-        System.out.println("Card suit: " + getStringSuit());
-        System.out.println("Card value: " + getStringValue());
-        System.out.println("Card score: " + getScore());
-    }
-
-    @Override
-    public String toString() {
-        return "Naipe: " + getStringSuit() + " Valor: " + getStringValue() + " Pontuação: " + getScore();
+        System.out.println(getStringValue() + " of " + getStringSuit());
     }
 
     private void setSuit(int suit) throws InvalidInput {

@@ -1,63 +1,50 @@
 package Core;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Properties;
+import java.util.List;
 
 public class Core {
 
+    private final CoreConstants coreConstants;
     private String serverHost;
     private int serverPort;
-    private ArrayList<String> consoleTags;
+    private List<String> consoleTags;
 
-    public Core(String propertiesFile) throws IOException {
+    public Core() {
+        this.coreConstants = new CoreConstants();
         loadCoreProperties();
-        loadConfigProperties(propertiesFile);
+        loadConfigProperties();
     }
 
-    private void loadCoreProperties() throws IOException {
-        Properties properties = new Properties();
-        InputStream inputStream = new FileInputStream("F:\\Projetos\\lp2-projeto-final\\src\\main\\resources\\core.properties");
-        properties.load(inputStream);
-
-        setConsoleTags(properties);
+    private void loadCoreProperties() {
+        setConsoleTags();
     }
 
-    private void loadConfigProperties(String propertiesFile) throws IOException {
-        Properties properties = new Properties();
-        InputStream inputStream = new FileInputStream(propertiesFile);
-        properties.load(inputStream);
-
-        setServerHost(properties);
-        setServerPort(properties);
+    private void loadConfigProperties() {
+        setServerHost();
+        setServerPort();
     }
 
-    private void setServerHost(Properties properties) {
-        this.serverHost = properties.getProperty("serverHost");
+    private void setServerHost() {
+        this.serverHost = coreConstants.SERVER_HOST;
     }
 
     public String getServerHost() {
         return serverHost;
     }
 
-    private void setServerPort(Properties properties) {
-        this.serverPort = Integer.parseInt(properties.getProperty("serverPort"));
+    private void setServerPort() {
+        this.serverPort = coreConstants.SERVER_PORT;
     }
 
     public int getServerPort() {
         return serverPort;
     }
 
-    private void setConsoleTags(Properties properties) {
-        consoleTags = new ArrayList<>();
-        consoleTags.add(properties.getProperty("consoleServerInfo"));
-        consoleTags.add(properties.getProperty("consoleServerWarning"));
-        consoleTags.add(properties.getProperty("consoleServerError"));
+    private void setConsoleTags() {
+        this.consoleTags = coreConstants.CONSOLE_TAGS;
     }
 
-    public ArrayList<String> getConsoleTags() {
+    public List<String> getConsoleTags() {
         return consoleTags;
     }
 }
