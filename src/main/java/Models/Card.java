@@ -67,4 +67,8 @@ public class Card implements Serializable {
     public int getScore() {
         return score;
     }
+
+    public int getSuit() {
+        return this.suit;
+    }
 }

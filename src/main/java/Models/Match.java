@@ -4,7 +4,6 @@ import Core.CoreGame;
 import Exceptions.InvalidGameMovement;
 import Exceptions.InvalidInput;
 import UI.ClientUI;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +18,7 @@ public class Match implements Serializable {
     private final Deck tableDeck;
     private final Player playerOne;
     private final Player playerTwo;
+    private boolean isSecondPlayer;
 
     public Match(Player playerOne, Player playerTwo, ClientUI clientUI) {
         this.coreGame = new CoreGame();
@@ -27,28 +27,42 @@ public class Match implements Serializable {
         this.tableDeck = new Deck();
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
+        this.isSecondPlayer = false;
+
         coreGame.prepareMatch(playerOne, playerTwo, deck, tableDeck);
     }
 
-    public void startMatch() {
+    public void startMatch() throws InvalidInput {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            clientUI.displayCurrentGameCards(playerOne, tableDeck);
+            Player player = (isSecondPlayer) ? playerTwo : playerOne;
+
+            if(deck.getArrayOfCards().size() <= 6) {
+                coreGame.finishGame(playerOne, playerTwo);
+                break;
+            }
+
+            if(playerOne.getHand().getCards().size() == 0 && playerTwo.getHand().getCards().size() == 0) {
+                coreGame.giveNewHand(playerOne, playerTwo, deck);
+            }
+
+            clientUI.displayCurrentGameCards(player, tableDeck);
             clientUI.selectHandCard();
 
             int selectedCard = -1;
             while (selectedCard < 0) {
-                selectedCard = selectCardFromHand(playerOne.getHand(), scanner) - 1;
+                selectedCard = selectCardFromHand(player.getHand(), scanner) - 1;
             }
 
             clientUI.quantityToSelectFromTable();
             int quantity = quantityToSelectFromTableDeck(scanner);
-            clientUI.selectCardsFromTable();
+            if(quantity > 0) clientUI.selectCardsFromTable();
             List<Integer> selectedCardsFromTable = selectCardFromTableDeck(tableDeck, scanner, quantity);
 
             try {
-                coreGame.performGameMove(playerOne, tableDeck, selectedCard, selectedCardsFromTable);
+                coreGame.performGameMove(player, tableDeck, selectedCard, selectedCardsFromTable);
+                this.isSecondPlayer = !this.isSecondPlayer;
             } catch (InvalidGameMovement e) {
                 System.out.println(e.getMessage());
             }
@@ -75,7 +89,7 @@ public class Match implements Serializable {
         while (true) {
             try {
                 quantity = Integer.parseInt(scanner.nextLine());
-                if (quantity < 0) throw new InvalidInput("A quantidade deve ser maior que 0!");
+                if (quantity < 0 || quantity > tableDeck.getArrayOfCards().size()) throw new InvalidInput("A quantidade deve ser maior que 0!");
                 return quantity;
             } catch (InvalidInput e) {
                 System.out.println(e.getMessage());

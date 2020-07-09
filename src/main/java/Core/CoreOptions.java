@@ -3,18 +3,18 @@ package Core;
 import Exceptions.InvalidInput;
 import Models.Player;
 import UI.ClientUI;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class CoreOptions {
 
-    private final Player player;
     private final ClientUI clientUI;
     private final CoreRoutes coreRoutes;
 
-    public CoreOptions(Core core, Player player) {
-        this.player = player;
-        this.clientUI = new ClientUI(core);
-        this.coreRoutes = new CoreRoutes(core, this.player);
+    public CoreOptions(Player player) {
+        this.clientUI = new ClientUI();
+        this.coreRoutes = new CoreRoutes(player);
     }
 
     public boolean showOptions() {
@@ -30,22 +30,22 @@ public class CoreOptions {
 
         scanner.nextLine();
         try {
-            return optionsRedirects(option, scanner);
-        } catch (InvalidInput e) {
+            return optionsRedirects(option);
+        } catch (InvalidInput | IOException e) {
             System.out.println(e.getMessage());
             return false;
         }
     }
 
-    private boolean optionsRedirects(int option, Scanner scanner) throws InvalidInput {
+    private boolean optionsRedirects(int option) throws InvalidInput, IOException {
         switch(option) {
             case 1 :
-                coreRoutes.multiplayerOnlineMatch();
+                coreRoutes.createMultiplayerSession();
                 break;
-            case 3 :
+            case 2 :
                 coreRoutes.showStatistics();
                 break;
-            case 4 :
+            case 3 :
                 coreRoutes.changePlayerUsername();
                 break;
             case 0 :
